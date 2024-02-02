@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.dagger.hilt.android")
+    kotlin("kapt")
 }
 
 android {
@@ -35,6 +37,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        tasks.withType<org.jetbrains.kotlin.gradle.tasks.KaptGenerateStubs> {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
     }
     buildFeatures {
         compose = true
@@ -59,6 +66,29 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+
+    implementation("androidx.compose.material:material-icons-extended")
+
+    //// CAMERA STUFF ////
+    implementation ("androidx.camera:camera-camera2:1.2.1")
+    implementation ("androidx.camera:camera-lifecycle:1.2.1")
+    implementation ("androidx.camera:camera-view:1.2.1")
+    implementation ("androidx.camera:camera-extensions:1.2.1")
+
+    //// ACCOMPANIST ////
+    implementation ("com.google.accompanist:accompanist-permissions:0.34.0")
+
+    // ViewModel Compose
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1")
+
+    //Dagger - Hilt
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    kapt ("androidx.hilt:hilt-compiler:1.0.0")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
+
+    implementation("com.google.code.gson:gson:2.8.9")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -66,4 +96,8 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+}
+
+kapt {
+    correctErrorTypes = true
 }
