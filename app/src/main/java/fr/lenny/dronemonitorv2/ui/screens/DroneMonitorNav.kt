@@ -11,21 +11,41 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import fr.lenny.dronemonitorv2.ui.screens.camera_preview.CameraPreviewScreen
+import fr.lenny.dronemonitorv2.ui.screens.config.ConfigSreen
+import fr.lenny.dronemonitorv2.ui.screens.gps.GpsScreen
+import fr.lenny.dronemonitorv2.ui.screens.monitoring.MonitoringScreen
 import fr.lenny.dronemonitorv2.ui.theme.DroneMonitorV2Theme
 
 @Composable
 fun DroneMonitorNav() {
+    val navController = rememberNavController()
+
     Row(Modifier.fillMaxSize()) {
         NavBar(
             modifier = Modifier
                 .fillMaxHeight()
-                .fillMaxWidth(0.25f)
+                .fillMaxWidth(0.25f),
+            onNavToCamera = { navController.navigate(NavRoutes.CAMERA.name) },
+            onNavToMonitoring = { navController.navigate(NavRoutes.MONITORING.name) },
+            onNavToConfig = { navController.navigate(NavRoutes.CONFIG.name) },
+            onNavToGps = { navController.navigate(NavRoutes.GPS.name) }
         )
         Surface(Modifier
-            .fillMaxHeight()
-            .fillMaxWidth(0.75f)
+            .fillMaxSize()
         ) {
-
+            NavHost(
+                navController = navController,
+                startDestination = NavRoutes.CAMERA.name,
+            ) {
+                composable(NavRoutes.CAMERA.name) { CameraPreviewScreen(Modifier.fillMaxSize()) }
+                composable(NavRoutes.MONITORING.name) { MonitoringScreen() }
+                composable(NavRoutes.CONFIG.name) { ConfigSreen() }
+                composable(NavRoutes.GPS.name) { GpsScreen() }
+            }
         }
     }
 }

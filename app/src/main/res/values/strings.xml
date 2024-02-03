@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">DroneMonitorV2</string>
+    <string name="logo">Logo</string>
+    <string name="camera_button">Camera button</string>
+    <string name="cameraText">Camera</string>
+    <string name="config_button">Button config</string>
+    <string name="configText">Config</string>
+    <string name="monitoringText">Monitoring</string>
+    <string name="monitoring_button">Monitoring button</string>
+    <string name="gps_button">Gps button</string>
+    <string name="gpsText">Navigation</string>
+    <string name="permission_text">Veuillez activer la permission de la camera dans les paramètres.</string>
+    <string name="camera_not_found">Please connect a external usb camera!</string>
+    <string name="enter_drone_ip">Enter drone IP</string>
 </resources>

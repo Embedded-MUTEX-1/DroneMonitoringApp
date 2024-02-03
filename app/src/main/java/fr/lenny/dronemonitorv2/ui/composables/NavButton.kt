@@ -3,6 +3,7 @@ package fr.lenny.dronemonitorv2.ui.composables
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -42,10 +43,11 @@ fun NavButton(icon: ImageVector, iconDescription: String,text: String, modifier:
     ) {
         Row(modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
             Icon(imageVector = icon, contentDescription = iconDescription, Modifier.size(30.dp))
-            Box(
-                contentAlignment = Alignment.Center,
+            Row(
                 modifier = Modifier.fillMaxSize(1f),
+                verticalAlignment = Alignment.CenterVertically
             ) {
+                Spacer(modifier = Modifier.width(10.dp))
                 Text(
                     text = text,
                     textAlign = TextAlign.Center,
