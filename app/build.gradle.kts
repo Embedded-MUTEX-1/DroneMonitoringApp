@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "fr.lenny.dronemonitorv2"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -100,6 +100,8 @@ dependencies {
     implementation ("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     implementation("com.google.code.gson:gson:2.8.9")
+
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

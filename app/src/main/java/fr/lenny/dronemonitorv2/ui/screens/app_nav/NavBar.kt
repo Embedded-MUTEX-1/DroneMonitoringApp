@@ -1,4 +1,4 @@
-package fr.lenny.dronemonitorv2.ui.screens
+package fr.lenny.dronemonitorv2.ui.screens.app_nav
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -21,7 +21,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -132,7 +131,7 @@ fun NavBar(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(45.dp),
-            onClicked = onNavToCamera
+            onClicked = onNavToGps
         )
 
         Divider(

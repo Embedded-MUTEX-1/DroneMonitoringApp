@@ -6,12 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
-import fr.lenny.dronemonitorv2.ui.screens.DroneMonitorNav
+import fr.lenny.dronemonitorv2.ui.screens.DroneMonitorMain
 import fr.lenny.dronemonitorv2.ui.theme.DroneMonitorV2Theme
 
 @AndroidEntryPoint
@@ -24,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    DroneMonitorNav()
+                    DroneMonitorMain()
                 }
             }
         }
@@ -44,7 +43,7 @@ fun MainPreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            DroneMonitorNav()
+            DroneMonitorMain()
         }
     }
 }

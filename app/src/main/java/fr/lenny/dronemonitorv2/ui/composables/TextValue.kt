@@ -41,7 +41,7 @@ fun TextValue(modifier: Modifier = Modifier, name: String, value: String) {
     ) {
         Box(
             modifier = Modifier
-                .width(100.dp)
+                .width(90.dp)
                 .fillMaxHeight(),
             contentAlignment = Alignment.Center
         ) {
@@ -51,12 +51,12 @@ fun TextValue(modifier: Modifier = Modifier, name: String, value: String) {
                 fontWeight = FontWeight.Bold
             )
         }
-        Spacer(modifier = Modifier.width(10.dp))
+
         Box(modifier = Modifier
             .fillMaxWidth(1f)
             .fillMaxHeight()
             .background(MaterialTheme.colorScheme.background, RoundedCornerShape(50.dp))
-            .border(2.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(50.dp))
+            .border(3.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(50.dp))
             .clip(RoundedCornerShape(50.dp)),
             contentAlignment = Alignment.Center
         ) {
@@ -74,7 +74,7 @@ fun TextValuePreview() {
             Modifier
                 .width(250.dp)
                 .background(MaterialTheme.colorScheme.background),
-            name = "Longitude", value = "1000"
+            name = "Longitude", value = "48.0000000"
         )
     }
 }

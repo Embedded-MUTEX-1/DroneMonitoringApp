@@ -26,7 +26,7 @@ import fr.lenny.dronemonitorv2.ui.theme.DroneMonitorV2Theme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ConfigTextField(modifier: Modifier = Modifier, configValue: String, onValueChanged: (newValue: String) -> Unit) {
-    Box(modifier = Modifier
+    Box(modifier = modifier
         .width(100.dp)
         .height(35.dp)
         .background(MaterialTheme.colorScheme.background, RoundedCornerShape(50.dp))

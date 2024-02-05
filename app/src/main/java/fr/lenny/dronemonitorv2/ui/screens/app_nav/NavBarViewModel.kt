@@ -1,4 +1,4 @@
-package fr.lenny.dronemonitorv2.ui.screens
+package fr.lenny.dronemonitorv2.ui.screens.app_nav
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

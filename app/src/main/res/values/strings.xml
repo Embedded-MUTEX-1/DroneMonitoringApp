@@ -12,4 +12,5 @@
     <string name="permission_text">Veuillez activer la permission de la camera dans les paramètres.</string>
     <string name="camera_not_found">Please connect a external usb camera!</string>
     <string name="enter_drone_ip">Enter drone IP</string>
+    <string name="drone_motors">Drone motors</string>
 </resources>
