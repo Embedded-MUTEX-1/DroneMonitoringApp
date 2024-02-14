@@ -13,4 +13,8 @@
     <string name="camera_not_found">Please connect a external usb camera!</string>
     <string name="enter_drone_ip">Enter drone IP</string>
     <string name="drone_motors">Drone motors</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="recv_data_error">Recv data error</string>
+    <string name="recv_data_timeout">Recv data timeout</string>
 </resources>

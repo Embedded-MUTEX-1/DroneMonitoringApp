@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -25,7 +26,9 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import fr.lenny.dronemonitorv2.MAX_DATASET_LEN
 import fr.lenny.dronemonitorv2.R
+import fr.lenny.dronemonitorv2.listOfColors
 import fr.lenny.dronemonitorv2.ui.theme.DroneMonitorV2Theme
 
 
@@ -37,8 +40,17 @@ fun RealTimeChart(
     maxX: Float,
     minY: Float,
     maxY: Float,
-    dataSets: List<ILineDataSet>
+    dataSets: List<LineDataSet>
 ) {
+
+    for (i in 0..dataSets.size - 1) {
+        dataSets[i].apply {
+            setDrawCircles(false)
+            setDrawValues(false)
+            color = getColor(LocalContext.current, listOfColors[i])
+        }
+    }
+
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(25.dp))
@@ -58,7 +70,26 @@ fun RealTimeChart(
                     xAxis.position = XAxis.XAxisPosition.BOTTOM
                     xAxis.axisMinimum = minX
                     xAxis.axisMaximum = maxX
-                    xAxis.mAxisRange = maxX
+                    xAxis.mAxisRange = MAX_DATASET_LEN.toFloat()
+                    axisLeft.axisMinimum = minY
+                    axisLeft.axisMaximum = maxY
+                    axisLeft.setDrawZeroLine(true)
+                    axisLeft.zeroLineWidth = 1f
+                    axisLeft.zeroLineColor = getColor(getContext() ,R.color.black)
+                    axisRight.isEnabled = false
+                    invalidate()
+                }
+            },
+            update = {
+                it.apply {
+                    setData(LineData(dataSets))
+                    setTouchEnabled(true)
+                    setPinchZoom(false)
+                    isDoubleTapToZoomEnabled = false
+                    xAxis.position = XAxis.XAxisPosition.BOTTOM
+                    xAxis.axisMinimum = minX
+                    xAxis.axisMaximum = maxX
+                    xAxis.mAxisRange = MAX_DATASET_LEN.toFloat()
                     axisLeft.axisMinimum = minY
                     axisLeft.axisMaximum = maxY
                     axisLeft.setDrawZeroLine(true)

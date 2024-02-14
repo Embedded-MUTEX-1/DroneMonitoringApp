@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -23,11 +24,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import fr.lenny.dronemonitorv2.R
 import fr.lenny.dronemonitorv2.ui.composables.ConfigTextField
+import fr.lenny.dronemonitorv2.ui.screens.app_nav.NavBarViewModel
 
 @Composable
-fun ConfigSreen(modifier: Modifier = Modifier) {
+fun ConfigSreen(
+    viewModel: ConfigViewModel = hiltViewModel(),
+    modifier: Modifier = Modifier
+) {
+    val textFieldValues = viewModel.textFieldValues.collectAsState()
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -53,38 +61,38 @@ fun ConfigSreen(modifier: Modifier = Modifier) {
                     )
 
                     ConfigTextField(
-                        configValue = "1000",
+                        configValue = "NA",
                         onValueChanged = { },
                         modifier = Modifier.align(Alignment.CenterStart)
                     )
 
                     ConfigTextField(
-                        configValue = "1000",
-                        onValueChanged = { },
+                        configValue = textFieldValues.value[ConfigValueName.MOT1.ordinal],
+                        onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.MOT1.ordinal) },
                         modifier = Modifier.align(Alignment.TopStart)
                     )
 
                     ConfigTextField(
-                        configValue = "1000",
-                        onValueChanged = { },
+                        configValue = textFieldValues.value[ConfigValueName.MOT2.ordinal],
+                        onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.MOT2.ordinal) },
                         modifier = Modifier.align(Alignment.TopEnd)
                     )
 
                     ConfigTextField(
-                        configValue = "1000",
+                        configValue = "NA",
                         onValueChanged = { },
                         modifier = Modifier.align(Alignment.CenterEnd)
                     )
 
                     ConfigTextField(
-                        configValue = "1000",
-                        onValueChanged = { },
+                        configValue = textFieldValues.value[ConfigValueName.MOT4.ordinal],
+                        onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.MOT4.ordinal) },
                         modifier = Modifier.align(Alignment.BottomEnd)
                     )
 
                     ConfigTextField(
-                        configValue = "1000",
-                        onValueChanged = { },
+                        configValue = textFieldValues.value[ConfigValueName.MOT3.ordinal],
+                        onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.MOT3.ordinal) },
                         modifier = Modifier.align(Alignment.BottomStart)
                     )
                 }
@@ -106,9 +114,9 @@ fun ConfigSreen(modifier: Modifier = Modifier) {
                     modifier.fillMaxWidth(),
                     Arrangement.SpaceAround
                 ) {
-                    ConfigTextField(configValue = "1.0", onValueChanged = {  })
-                    ConfigTextField(configValue = "1.0", onValueChanged = {  })
-                    ConfigTextField(configValue = "1.0", onValueChanged = {  })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.ROLL.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.ROLL.ordinal) })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.PITCH.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.PITCH.ordinal) })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.YAW.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.YAW.ordinal) })
                 }
             }
 
@@ -124,9 +132,9 @@ fun ConfigSreen(modifier: Modifier = Modifier) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(text = "Param1", modifier.width(100.dp), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
-                    Text(text = "Param1", modifier.width(100.dp), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.PARAM1.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.PARAM1.ordinal) })
+                    Text(text = "Param2", modifier.width(100.dp), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.PARAM2.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.PARAM2.ordinal) })
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -150,9 +158,9 @@ fun ConfigSreen(modifier: Modifier = Modifier) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(text = "Roll & Pitch", modifier.width(100.dp), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.P_ROLL_PITCH.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.P_ROLL_PITCH.ordinal) })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.I_ROLL_PITCH.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.I_ROLL_PITCH.ordinal) })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.D_ROLL_PITCH.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.D_ROLL_PITCH.ordinal) })
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -163,9 +171,9 @@ fun ConfigSreen(modifier: Modifier = Modifier) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(text = "Yaw", modifier.width(100.dp), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.P_YAW.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.P_YAW.ordinal) })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.I_YAW.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.I_YAW.ordinal) })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.D_YAW.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.D_YAW.ordinal) })
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -176,9 +184,9 @@ fun ConfigSreen(modifier: Modifier = Modifier) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(text = "Altitude", modifier.width(100.dp), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.P_ALT.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.P_ALT.ordinal) })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.I_ALT.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.I_ALT.ordinal) })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.D_ALT.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.D_ALT.ordinal) })
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -189,17 +197,38 @@ fun ConfigSreen(modifier: Modifier = Modifier) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(text = "Navigation", modifier.width(100.dp), textAlign = TextAlign.Center, fontWeight = FontWeight.Bold)
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
-                    ConfigTextField(configValue = "0.3", onValueChanged = { })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.P_NAV.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.P_NAV.ordinal) })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.I_NAV.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.I_NAV.ordinal) })
+                    ConfigTextField(configValue = textFieldValues.value[ConfigValueName.D_NAV.ordinal], onValueChanged = { newText -> viewModel.updateTextFields(newText, ConfigValueName.D_NAV.ordinal) })
                 }
             }
         }
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
-        Button(onClick = { /*TODO*/ }) {
-            Text(text = "DISARMED")
+        Row(
+            Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Button(onClick = { viewModel.setDisarmedMode() }) {
+                Text(text = "DISARM")
+            }
+
+            Button(onClick = { viewModel.setManualMode() }) {
+                Text(text = "MANUAL")
+            }
+
+            Button(onClick = { viewModel.setAutoMode() }) {
+                Text(text = "AUTO")
+            }
+
+            Button(onClick = { viewModel.sendConfig() }) {
+                Text(text = "CONFIG")
+            }
+
+            Button(onClick = { viewModel.getConfig() }) {
+                Text(text = "GET CONFIG")
+            }
         }
     }
 }

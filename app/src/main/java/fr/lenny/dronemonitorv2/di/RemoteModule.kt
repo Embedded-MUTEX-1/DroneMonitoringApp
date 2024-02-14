@@ -4,8 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import fr.lenny.dronemonitorv2.data.remote.udp.Udp
-import fr.lenny.dronemonitorv2.data.remote.udp.UdpDataSource
+import fr.lenny.dronemonitorv2.data.remote.udp.DroneDataSource
+import fr.lenny.dronemonitorv2.data.remote.udp.UdpDroneDataSource
 import javax.inject.Singleton
 
 @Module
@@ -13,5 +13,5 @@ import javax.inject.Singleton
 abstract class RemoteModule {
     @Singleton
     @Binds
-    abstract fun bindUdpDataSource(udp: UdpDataSource): Udp
+    abstract fun bindUdpDataSource(dataSource: UdpDroneDataSource): DroneDataSource
 }

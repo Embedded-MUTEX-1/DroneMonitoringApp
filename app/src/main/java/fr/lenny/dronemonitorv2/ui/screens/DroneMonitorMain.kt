@@ -42,7 +42,7 @@ fun DroneMonitorMain() {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = NavRoutes.CONFIG.name,
+                startDestination = NavRoutes.MONITORING.name,
             ) {
                 composable(NavRoutes.CAMERA.name) { CameraPreviewScreen(Modifier.fillMaxSize()) }
                 composable(NavRoutes.MONITORING.name) { MonitoringScreen() }

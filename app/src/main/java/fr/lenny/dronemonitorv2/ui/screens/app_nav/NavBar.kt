@@ -1,5 +1,6 @@
 package fr.lenny.dronemonitorv2.ui.screens.app_nav
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,6 +16,7 @@ import androidx.compose.material.icons.outlined.BarChart
 import androidx.compose.material.icons.outlined.Build
 import androidx.compose.material.icons.outlined.LocalSee
 import androidx.compose.material.icons.outlined.LocationOn
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +25,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,14 +33,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import fr.lenny.dronemonitorv2.R
 import fr.lenny.dronemonitorv2.ui.composables.NavButton
 import fr.lenny.dronemonitorv2.ui.theme.DroneMonitorV2Theme
+import kotlinx.coroutines.flow.collect
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,7 +56,14 @@ fun NavBar(
     onNavToConfig: () -> Unit,
     onNavToGps: () -> Unit,
 ) {
-    var ipAddr by remember { mutableStateOf("") }
+    val ipAddr = viewModel.ipAddrText.collectAsState()
+    val buttonState = viewModel.buttonState.collectAsState()
+    val event = viewModel.event.collectAsState()
+
+    if(event.value == EventType.JSON_ERR)
+        Toast.makeText(LocalContext.current, stringResource(R.string.recv_data_error), Toast.LENGTH_SHORT).show()
+    else if(event.value == EventType.TIMEOUT_ERR)
+        Toast.makeText(LocalContext.current, stringResource(R.string.recv_data_timeout), Toast.LENGTH_SHORT).show()
 
     Column(
         modifier = modifier
@@ -142,14 +156,27 @@ fun NavBar(
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = ipAddr,
-            onValueChange = { newText -> ipAddr = newText },
+            value = ipAddr.value,
+            onValueChange = { newText -> viewModel.updateTextField(newText) },
             modifier = Modifier
                 .fillMaxWidth(0.93f),
             colors = TextFieldDefaults.outlinedTextFieldColors(containerColor = MaterialTheme.colorScheme.background),
             shape = RoundedCornerShape(10.dp),
-            placeholder = { Text(text = stringResource(R.string.enter_drone_ip)) }
+            placeholder = { Text(text = stringResource(R.string.enter_drone_ip)) },
         )
+
+        Spacer(modifier = Modifier.height(10.dp))
+        
+        Button(
+            onClick = { viewModel.setDroneIpaddr() },
+            modifier = Modifier
+                .fillMaxWidth(0.93f),
+        ) {
+            Text(
+                text = if (buttonState.value) stringResource(R.string.stop) else stringResource(R.string.start),
+                fontSize = 25.sp
+            )
+        }
     }
 }
 
