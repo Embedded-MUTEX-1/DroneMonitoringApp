@@ -1,8 +1,9 @@
 # DroneMonitoringApp
-This mobile app allow to monitor and configure drones like the Simple Flight Controller project.
+This mobile app allow to monitor and configure my [Autopilot Flight Controller](https://github.com/Embedded-MUTEX-1/Autopilot-Flight-Controller) project.
 
 The app run on Raspberry Pi4 with Android 12L.
 
 Status : in progress
 ## Preview
-![image](https://github.com/lenny1411/DroneMonitoringApp/assets/105748537/a8553451-fe7d-493e-9979-b80a71caec5b)
+
+![20240214_140607](https://github.com/Embedded-MUTEX-1/DroneMonitoringApp/assets/105748537/28e0e3cd-8136-4886-bd76-e6a4e33f0277)
